@@ -1,7 +1,28 @@
 {
   "dependencies": {
+    "com.cysharp.messagepipe": {
+      "version": "https://github.com/Cysharp/MessagePipe.git?path=src/MessagePipe.Unity/Assets/Plugins/MessagePipe",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "33a618d2b2914b37e0d27b21c4ed89500381e965"
+    },
+    "com.cysharp.messagepipe.vcontainer": {
+      "version": "https://github.com/Cysharp/MessagePipe.git?path=src/MessagePipe.Unity/Assets/Plugins/MessagePipe.VContainer",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "33a618d2b2914b37e0d27b21c4ed89500381e965"
+    },
+    "com.cysharp.unitask": {
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "2e993ff18f28c931602a07292df0b0804eebef99"
+    },
     "com.unity.ai.navigation": {
-      "version": "2.0.10",
+      "version": "2.0.13",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -20,7 +41,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.collab-proxy": {
-      "version": "2.11.3",
+      "version": "2.11.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -46,7 +67,7 @@
       "dependencies": {}
     },
     "com.unity.ide.rider": {
-      "version": "3.0.39",
+      "version": "3.0.40",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -55,7 +76,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.26",
+      "version": "2.0.27",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -163,7 +184,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.timeline": {
-      "version": "1.8.10",
+      "version": "1.8.12",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -184,7 +205,7 @@
       }
     },
     "com.unity.visualscripting": {
-      "version": "1.9.9",
+      "version": "1.9.11",
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -192,6 +213,88 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "jp.hadashikick.vcontainer": {
+      "version": "https://github.com/hadashiA/VContainer.git?path=VContainer/Assets/VContainer#1.18.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "6e6972730ce316fab2408f20e7a160aec070e48b"
+    },
+    "org.nuget.microsoft.bcl.asyncinterfaces": {
+      "version": "8.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.system.threading.tasks.extensions": "4.5.4"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.buffers": {
+      "version": "4.5.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.memory": {
+      "version": "4.5.5",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.system.buffers": "4.5.1",
+        "org.nuget.system.numerics.vectors": "4.4.0",
+        "org.nuget.system.runtime.compilerservices.unsafe": "4.5.3"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.numerics.vectors": {
+      "version": "4.4.0",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.runtime.compilerservices.unsafe": {
+      "version": "6.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.text.encodings.web": {
+      "version": "8.0.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.system.buffers": "4.5.1",
+        "org.nuget.system.memory": "4.5.5",
+        "org.nuget.system.runtime.compilerservices.unsafe": "6.0.0"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.text.json": {
+      "version": "8.0.5",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.microsoft.bcl.asyncinterfaces": "8.0.0",
+        "org.nuget.system.text.encodings.web": "8.0.0",
+        "org.nuget.system.buffers": "4.5.1",
+        "org.nuget.system.memory": "4.5.5",
+        "org.nuget.system.runtime.compilerservices.unsafe": "6.0.0",
+        "org.nuget.system.threading.tasks.extensions": "4.5.4"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
+    },
+    "org.nuget.system.threading.tasks.extensions": {
+      "version": "4.5.4",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "org.nuget.system.runtime.compilerservices.unsafe": "4.5.3"
+      },
+      "url": "https://unitynuget-registry.openupm.com"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
