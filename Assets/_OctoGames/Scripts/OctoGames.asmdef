@@ -1,0 +1,12 @@
+{
+    "name": "OctoGames",
+    "rootNamespace": "OctoGames",
+    "references": [
+        "UniTask",
+        "VContainer"
+    ],
+    "precompiledReferences": [
+        "System.Text.Json.dll"
+    ],
+    "allowUnsafeCode": false
+}
