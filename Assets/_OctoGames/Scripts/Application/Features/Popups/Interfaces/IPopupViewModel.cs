@@ -6,10 +6,12 @@ namespace OctoGames.App.Features.Popups
 {
     public interface IPopupViewModel : IDisposable
     {
-        void Initialize<TRequest>(TRequest request, PopupBaseView popup)
+        UniTask InitializeAsync<TRequest>(TRequest request, CancellationToken ct)
             where TRequest : IPopupRequest;
 
-        UniTask ShowAsync(CancellationToken ct);
+        UniTask WaitForCloseAsync(CancellationToken ct);
+
+        UniTask OnCloseAsync(CancellationToken ct);
 
         void RequestClose();
     }

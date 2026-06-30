@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using R3;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,7 +15,7 @@ namespace OctoGames.App.Features.Popups
         private readonly IPopupProvider _provider;
         private readonly PopupRoot _root;
         private readonly IObjectResolver _resolver;
-        private readonly Queue<PendingShow> _queue = new();
+        private readonly Queue<PendingPopup> _queue = new();
 
         private ActivePopup _active;
 
@@ -55,7 +56,7 @@ namespace OctoGames.App.Features.Popups
 
                 if (_active != null && policy == PopupShowPolicy.Queue)
                 {
-                    var pending = new PendingShow(
+                    var pending = new PendingPopup(
                         typeof(TPopup),
                         ct => ShowAsync<TPopup, TRequest>(request, ct),
                         options,
@@ -132,24 +133,29 @@ namespace OctoGames.App.Features.Popups
                     $"Prefab '{prefab.name}' for '{typeof(TPopup).FullName}' is missing {nameof(TPopup)}.");
             }
 
-            var viewModel = GetViewModel(instance);
-            if (viewModel == null)
-            {
-                Object.Destroy(instance);
-                throw new InvalidOperationException(
-                    $"Prefab '{prefab.name}' for '{typeof(TPopup).FullName}' is missing {nameof(IPopupViewModel)}.");
-            }
+            var binder = GetBinder<TPopup>(instance);
+            var viewModel = binder.ResolveViewModel(_resolver);
 
-            _active = new ActivePopup(typeof(TPopup), popup);
+            _active = new ActivePopup(typeof(TPopup), popup, viewModel);
+            var disposables = new CompositeDisposable();
 
             try
             {
-                popup.RegisterViewModel(viewModel);
-                viewModel.Initialize(request, popup);
-                await viewModel.ShowAsync(ct);
+                await viewModel.InitializeAsync(request, ct);
+                binder.Bind(popup, viewModel, disposables);
+
+                popup.SetPhase(PopupPhase.Opening);
+                await popup.PlayOpenAsync(ct);
+                popup.SetPhase(PopupPhase.Opened);
+                await viewModel.WaitForCloseAsync(ct);
+                await viewModel.OnCloseAsync(ct);
+                popup.SetPhase(PopupPhase.Closing);
+                await popup.PlayCloseAsync(ct);
+                popup.SetPhase(PopupPhase.Closed);
             }
             finally
             {
+                disposables.Dispose();
                 viewModel.Dispose();
 
                 if (instance != null)
@@ -161,17 +167,19 @@ namespace OctoGames.App.Features.Popups
             }
         }
 
-        private static IPopupViewModel GetViewModel(GameObject instance)
+        private static IPopupBinder<TPopup> GetBinder<TPopup>(GameObject instance)
+            where TPopup : PopupBaseView
         {
             var components = instance.GetComponents<MonoBehaviour>();
 
             for (var i = 0; i < components.Length; i++)
             {
-                if (components[i] is IPopupViewModel viewModel)
-                    return viewModel;
+                if (components[i] is IPopupBinder<TPopup> binder)
+                    return binder;
             }
 
-            return null;
+            throw new InvalidOperationException(
+                $"Prefab '{instance.name}' for '{typeof(TPopup).FullName}' is missing {nameof(IPopupBinder<TPopup>)}.");
         }
 
         private async UniTask TryShowNextFromQueueAsync()
@@ -182,7 +190,7 @@ namespace OctoGames.App.Features.Popups
 
                 try
                 {
-                    await next.Show(next.CancellationToken);
+                    await next.Popup(next.CancellationToken);
                     next.Completion.TrySetResult();
                 }
                 catch (Exception exception)
@@ -196,7 +204,9 @@ namespace OctoGames.App.Features.Popups
         private async UniTask CloseActiveAsync(CancellationToken ct)
         {
             var popup = _active.Popup;
-            popup.RequestClose();
+
+            if (popup.Phase == PopupPhase.Opened)
+                _active.ViewModel.RequestClose();
 
             await UniTask.WaitUntil(
                 () => _active == null || _active.Popup != popup,
@@ -209,7 +219,7 @@ namespace OctoGames.App.Features.Popups
             if (_queue.Count == 0)
                 return;
 
-            var remaining = new Queue<PendingShow>();
+            var remaining = new Queue<PendingPopup>();
 
             while (_queue.Count > 0)
             {
@@ -243,33 +253,35 @@ namespace OctoGames.App.Features.Popups
 
         private sealed class ActivePopup
         {
-            public ActivePopup(Type popupType, PopupBaseView popup)
+            public ActivePopup(Type popupType, PopupBaseView popup, IPopupViewModel viewModel)
             {
                 PopupType = popupType;
                 Popup = popup;
+                ViewModel = viewModel;
             }
 
             public Type PopupType { get; }
             public PopupBaseView Popup { get; }
+            public IPopupViewModel ViewModel { get; }
         }
 
-        private sealed class PendingShow
+        private sealed class PendingPopup
         {
-            public PendingShow(
+            public PendingPopup(
                 Type popupType,
-                Func<CancellationToken, UniTask> show,
+                Func<CancellationToken, UniTask> popup,
                 PopupShowOptions? options,
                 CancellationToken cancellationToken)
             {
                 PopupType = popupType;
-                Show = show;
+                Popup = popup;
                 Options = options;
                 CancellationToken = cancellationToken;
                 Completion = new UniTaskCompletionSource();
             }
 
             public Type PopupType { get; }
-            public Func<CancellationToken, UniTask> Show { get; }
+            public Func<CancellationToken, UniTask> Popup { get; }
             public PopupShowOptions? Options { get; }
             public CancellationToken CancellationToken { get; }
             public UniTaskCompletionSource Completion { get; }

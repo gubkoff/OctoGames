@@ -1,6 +1,5 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,10 +9,9 @@ namespace OctoGames.App.Features.Popups
     {
         [SerializeField] private CanvasGroup _canvasGroup;
         [SerializeField] private PopupAnimation _animation;
-        [SerializeField] private bool _closeOnBackdropTap;
+        [SerializeField] private bool _closeOnDimmerClick;
         [SerializeField] private Button _dimmerButton;
 
-        private IPopupViewModel _viewModel;
         private PopupPhase _phase = PopupPhase.Closed;
 
         public virtual System.Type PopupType => GetType();
@@ -22,7 +20,9 @@ namespace OctoGames.App.Features.Popups
 
         public bool IsInteractive => _phase == PopupPhase.Opened;
 
-        public bool CloseOnBackdropTap => _closeOnBackdropTap;
+        public bool CloseOnDimmerClick => _closeOnDimmerClick;
+
+        internal Button DimmerButton => _dimmerButton;
 
         protected virtual void Awake()
         {
@@ -32,8 +32,6 @@ namespace OctoGames.App.Features.Popups
             if (_animation == null)
                 _animation = GetComponent<PopupAnimation>();
         }
-
-        internal void RegisterViewModel(IPopupViewModel viewModel) => _viewModel = viewModel;
 
         internal void SetPhase(PopupPhase phase) => _phase = phase;
 
@@ -45,24 +43,6 @@ namespace OctoGames.App.Features.Popups
         internal UniTask PlayCloseAsync(CancellationToken ct)
         {
             return _animation.PlayCloseAsync(_canvasGroup, ct);
-        }
-
-        public void OnDimmerClick(CompositeDisposable disposable)
-        {
-            if (!_closeOnBackdropTap || _dimmerButton == null)
-                return;
-
-            _dimmerButton.OnClickAsObservable()
-                .Subscribe(_ => RequestClose())
-                .AddTo(disposable);
-        }
-
-        public void RequestClose()
-        {
-            if (_phase != PopupPhase.Opened)
-                return;
-
-            _viewModel?.RequestClose();
         }
     }
 }
