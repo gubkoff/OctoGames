@@ -3,7 +3,12 @@
     "rootNamespace": "OctoGames",
     "references": [
         "UniTask",
-        "VContainer"
+        "VContainer",
+        "Unity.InputSystem",
+        "UnityEngine.UI",
+        "R3.Unity",
+        "R3.Unity.TextMeshPro",
+        "Unity.TextMeshPro"
     ],
     "precompiledReferences": [
         "System.Text.Json.dll"
