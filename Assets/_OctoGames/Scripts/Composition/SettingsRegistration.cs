@@ -1,6 +1,6 @@
-using OctoGames.Gameplay.Features.Settings;
+using OctoGames.App.Features.Settings;
+using OctoGames.App.Features.Settings.Popups.ViewModels;
 using VContainer;
-using VContainer.Unity;
 
 namespace OctoGames.Composition
 {
@@ -9,7 +9,7 @@ namespace OctoGames.Composition
         public static void Register(IContainerBuilder builder)
         {
             builder.Register<ISettingsService, SettingsService>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<SettingsBootstrap>();
+            builder.Register<SettingsPopupViewModel>(Lifetime.Transient);
         }
     }
 }

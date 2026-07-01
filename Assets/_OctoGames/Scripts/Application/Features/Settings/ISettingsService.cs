@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using OctoGames.Persistence;
 
-namespace OctoGames.Gameplay.Features.Settings
+namespace OctoGames.App.Features.Settings
 {
     public interface ISettingsService
     {
