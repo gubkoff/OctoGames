@@ -1,0 +1,12 @@
+{
+    "name": "OctoGames.Application",
+    "rootNamespace": "OctoGames.App",
+    "references": [
+        "OctoGames.Core",
+        "UniTask",
+        "VContainer",
+        "UnityEngine.UI",
+        "R3.Unity"
+    ],
+    "allowUnsafeCode": false
+}

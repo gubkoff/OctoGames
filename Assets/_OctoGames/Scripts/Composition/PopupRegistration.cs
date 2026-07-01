@@ -1,5 +1,5 @@
 using System;
-using OctoGames.App.Features.Popups;
+using OctoGames.Popups;
 using VContainer;
 
 namespace OctoGames.Composition

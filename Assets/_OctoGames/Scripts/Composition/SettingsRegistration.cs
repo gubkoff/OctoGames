@@ -1,5 +1,5 @@
 using OctoGames.App.Features.Settings;
-using OctoGames.App.Features.Settings.Popups.ViewModels;
+using OctoGames.App.Features.Popups.SettingsPopup;
 using VContainer;
 
 namespace OctoGames.Composition

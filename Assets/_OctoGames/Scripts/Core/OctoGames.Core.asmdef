@@ -1,0 +1,14 @@
+{
+    "name": "OctoGames.Core",
+    "rootNamespace": "OctoGames",
+    "references": [
+        "UniTask",
+        "VContainer",
+        "UnityEngine.UI",
+        "R3.Unity"
+    ],
+    "precompiledReferences": [
+        "System.Text.Json.dll"
+    ],
+    "allowUnsafeCode": false
+}

@@ -1,4 +1,4 @@
-using OctoGames.App.Features.Popups;
+using OctoGames.Popups;
 using VContainer;
 using VContainer.Unity;
 using UnityEngine;

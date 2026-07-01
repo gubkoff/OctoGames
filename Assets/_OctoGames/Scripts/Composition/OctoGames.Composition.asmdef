@@ -1,0 +1,10 @@
+{
+    "name": "OctoGames.Composition",
+    "rootNamespace": "OctoGames.Composition",
+    "references": [
+        "OctoGames.Core",
+        "OctoGames.Application",
+        "VContainer"
+    ],
+    "allowUnsafeCode": false
+}

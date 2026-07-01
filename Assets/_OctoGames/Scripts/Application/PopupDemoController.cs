@@ -1,7 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using OctoGames.App.Features.Popups;
-using OctoGames.App.Features.Settings.Popups.Views;
+using OctoGames.Popups;
+using OctoGames.App.Features.Popups.SettingsPopup;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
