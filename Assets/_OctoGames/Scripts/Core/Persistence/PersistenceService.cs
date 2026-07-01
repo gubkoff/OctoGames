@@ -6,9 +6,9 @@ namespace OctoGames.Persistence
 {
     public sealed class PersistenceService : IPersistence
     {
-        readonly IStorageProvider _provider;
-        readonly IDataSerializer _serializer;
-        readonly SemaphoreSlim _writeLock = new(1, 1);
+        private readonly IStorageProvider _provider;
+        private readonly IDataSerializer _serializer;
+        private readonly SemaphoreSlim _writeLock = new(1, 1);
 
         public PersistenceService(IStorageProvider provider, IDataSerializer serializer)
         {

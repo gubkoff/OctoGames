@@ -5,7 +5,7 @@ namespace OctoGames.Persistence.Serialization
 {
     public sealed class SystemTextJsonDataSerializer : IDataSerializer
     {
-        readonly JsonSerializerOptions _options;
+        private readonly JsonSerializerOptions _options;
 
         public SystemTextJsonDataSerializer(JsonSerializerOptions options = null)
         {

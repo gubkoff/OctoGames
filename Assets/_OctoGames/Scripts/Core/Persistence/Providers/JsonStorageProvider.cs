@@ -7,7 +7,7 @@ namespace OctoGames.Persistence.Providers
 {
     public sealed class JsonStorageProvider : IStorageProvider
     {
-        readonly string _rootDirectory;
+        private readonly string _rootDirectory;
 
         public JsonStorageProvider(string rootDirectory)
         {
@@ -110,10 +110,10 @@ namespace OctoGames.Persistence.Providers
             }
         }
 
-        string GetFilePath(string key) =>
+        private string GetFilePath(string key) =>
             Path.Combine(_rootDirectory, SanitizeKey(key) + ".json");
 
-        static string SanitizeKey(string key)
+        private static string SanitizeKey(string key)
         {
             if (string.IsNullOrWhiteSpace(key))
                 throw new ArgumentException("Key is required.", nameof(key));

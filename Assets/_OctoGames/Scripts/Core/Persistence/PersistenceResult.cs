@@ -6,7 +6,7 @@ namespace OctoGames.Persistence
 
         public bool IsSuccess => Status == PersistenceStatus.Success;
 
-        PersistenceResult(PersistenceStatus status) => Status = status;
+        private PersistenceResult(PersistenceStatus status) => Status = status;
 
         public static PersistenceResult Ok() => new(PersistenceStatus.Success);
 
@@ -20,7 +20,7 @@ namespace OctoGames.Persistence
 
         public bool IsSuccess => Status == PersistenceStatus.Success;
 
-        PersistenceResult(PersistenceStatus status, T value)
+        private PersistenceResult(PersistenceStatus status, T value)
         {
             Status = status;
             Value = value;
