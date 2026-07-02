@@ -20,15 +20,15 @@ namespace OctoGames.Composition
         {
             if (initialState == null)
                 throw new System.InvalidOperationException(
-                    "SOGameplayEntitiesInitialState is not assigned on EntityTrackerLifetimeScope.");
+                    "SOGameplayEntitiesInitialState is not assigned on GameLifetimeScope.");
 
             if (entityCatalog == null)
                 throw new System.InvalidOperationException(
-                    "SOGameplayEntityCatalog is not assigned on EntityTrackerLifetimeScope.");
+                    "SOGameplayEntityCatalog is not assigned on GameLifetimeScope.");
 
             if (entitiesRoot == null)
                 throw new System.InvalidOperationException(
-                    "Entities root Transform is not assigned on EntityTrackerLifetimeScope.");
+                    "Entities root Transform is not assigned on GameLifetimeScope.");
 
             builder.Register<GameplayEntityRepository>(Lifetime.Singleton)
                 .As<IRepository<IGameplayEntity>>();
