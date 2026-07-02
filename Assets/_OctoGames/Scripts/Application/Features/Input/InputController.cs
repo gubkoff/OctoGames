@@ -1,5 +1,6 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using OctoGames.App.Features.Entities;
 using OctoGames.App.Features.Popups.EntityDetailPopup;
 using EntityDetailPopupView = OctoGames.App.Features.Popups.EntityDetailPopup.EntityDetailPopup;
 using OctoGames.Popups;
@@ -8,9 +9,9 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using VContainer;
 
-namespace OctoGames.App.Features.Entities.Demo
+namespace OctoGames.App.Features.Input
 {
-    public sealed class EntityPickController : MonoBehaviour
+    public sealed class InputController : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
         [SerializeField] private float _maxDistance = 200f;

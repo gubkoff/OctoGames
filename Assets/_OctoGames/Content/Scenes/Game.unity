@@ -618,6 +618,7 @@ GameObject:
   - component: {fileID: 998377785}
   - component: {fileID: 998377784}
   - component: {fileID: 998377783}
+  - component: {fileID: 998377787}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -636,8 +637,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b086d9bcb4e24c9d8c40945c8459b51, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: OctoGames.Application::OctoGames.App.Features.Entities.Demo.EntityPickController
-  _camera: {fileID: 0}
+  m_EditorClassIdentifier: OctoGames.Application::OctoGames.App.Features.Input.InputController
+  _camera: {fileID: 998377785}
   _maxDistance: 200
   _layerMask:
     serializedVersion: 2
@@ -716,6 +717,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &998377787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998377782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &1825579725
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,6 +927,62 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227791618489885224, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 698065609352875450, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 698065609352875450, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 698065609352875450, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158157546459502597, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158157546459502597, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158157546459502597, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1677369075038989562, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1677369075038989562, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1677369075038989562, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3684079462171629850, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3684079462171629850, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428606878373479022, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428606878373479022, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428606878373479022, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7472559427236994365, guid: 3d7dbbb4ba3c44530948d231383a9112, type: 3}
