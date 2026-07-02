@@ -1,6 +1,7 @@
 using OctoGames.App;
 using OctoGames.App.Features.Entities;
-using OctoGames.App.Features.Popups.ClassicConfirmPopup;
+using OctoGames.App.Features.HUD;
+using OctoGames.App.Features.Popups.ConfirmPopup;
 using OctoGames.App.Features.Popups.EntityDetailPopup;
 using OctoGames.Repository;
 using UnityEngine;
@@ -32,18 +33,22 @@ namespace OctoGames.Composition
             builder.Register<GameplayEntityRepository>(Lifetime.Singleton)
                 .As<IRepository<IGameplayEntity>>();
 
-            builder.Register<GameplayEntityTracker>(Lifetime.Singleton)
-                .As<IGameplayEntityTracker>();
-
             builder.RegisterInstance(initialState);
             builder.RegisterInstance(entityCatalog);
             builder.RegisterInstance(entitiesRoot);
 
-            builder.Register<GameplaySceneStateService>(Lifetime.Singleton)
-                .As<IGameplaySceneStateService>();
+            builder.Register<GameplayEntityStateService>(Lifetime.Singleton)
+                .As<IGameplayEntityStateService>();
+
+            builder.Register<GameplayEntitySpawner>(Lifetime.Singleton)
+                .As<IGameplayEntitySpawner>();
+
+            builder.Register<GameplayEntityService>(Lifetime.Singleton)
+                .As<IGameplayEntityService>();
 
             builder.Register<ConfirmPopupViewModel>(Lifetime.Transient);
             builder.Register<EntityDetailPopupViewModel>(Lifetime.Transient);
+            builder.Register<BaseHUDViewModel>(Lifetime.Transient);
 
             builder.RegisterEntryPoint<ApplicationEntryPoint>();
         }

@@ -7,13 +7,13 @@ namespace OctoGames.App
 {
     public sealed class ApplicationEntryPoint : IAsyncStartable
     {
-        private readonly IGameplaySceneStateService _sceneState;
+        private readonly IGameplayEntityService _entityService;
 
-        public ApplicationEntryPoint(IGameplaySceneStateService sceneState)
+        public ApplicationEntryPoint(IGameplayEntityService entityService)
         {
-            _sceneState = sceneState;
+            _entityService = entityService;
         }
 
-        public UniTask StartAsync(CancellationToken ct) => _sceneState.LoadOrInitializeAsync(ct);
+        public UniTask StartAsync(CancellationToken ct) => _entityService.LoadOrInitializeAsync(ct);
     }
 }
