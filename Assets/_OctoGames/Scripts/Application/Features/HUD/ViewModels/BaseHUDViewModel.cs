@@ -4,6 +4,8 @@ using Cysharp.Threading.Tasks;
 using OctoGames.App.Features.Entities;
 using OctoGames.App.Features.Popups.ConfirmPopup;
 using ConfirmPopupView = OctoGames.App.Features.Popups.ConfirmPopup.ConfirmPopup;
+using OctoGames.App.Features.Popups.SettingsPopup;
+using SettingsPopupView = OctoGames.App.Features.Popups.SettingsPopup.SettingsPopup;
 using OctoGames.Popups;
 using OctoGames.Repository;
 using R3;
@@ -32,20 +34,19 @@ namespace OctoGames.App.Features.HUD
 
         public void Activate()
         {
+            _repository.Changed += Refresh;
             _popupService.AllClosed += Refresh;
             Refresh();
         }
 
         public void Deactivate()
         {
+            _repository.Changed -= Refresh;
             _popupService.AllClosed -= Refresh;
         }
 
-        public async UniTask AddEntityAsync(GameplayEntityType type, CancellationToken ct)
-        {
-            await _entityService.AddEntityAsync(type, ct);
-            Refresh();
-        }
+        public UniTask AddEntityAsync(GameplayEntityType type, CancellationToken ct) =>
+            _entityService.AddEntityAsync(type, ct);
 
         public async UniTask RestartAsync(CancellationToken ct)
         {
@@ -54,15 +55,13 @@ namespace OctoGames.App.Features.HUD
                 "Current save will be deleted and the initial layout restored.",
                 "Restart",
                 "Cancel",
-                onConfirm: async token =>
-                {
-                    await _entityService.ResetToInitialAsync(token);
-                    Refresh();
-                });
+                onConfirm: token => _entityService.ResetToInitialAsync(token));
 
             await _popupService.ShowAsync<ConfirmPopupView, ConfirmPopupRequest>(request, ct: ct);
-            Refresh();
         }
+
+        public UniTask OpenSettingsAsync(CancellationToken ct) =>
+            _popupService.ShowAsync<SettingsPopupView>(ct: ct);
 
         public void Refresh()
         {

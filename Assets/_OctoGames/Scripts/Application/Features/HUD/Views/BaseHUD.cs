@@ -10,11 +10,13 @@ namespace OctoGames.App.Features.HUD
         [SerializeField] private Button _addInteractableButton;
         [SerializeField] private Button _addStoryActorButton;
         [SerializeField] private Button _restartButton;
+        [SerializeField] private Button _settingsButton;
 
         internal Text ActiveCountText => _activeCountText;
         internal Button AddEnemyButton => _addEnemyButton;
         internal Button AddInteractableButton => _addInteractableButton;
         internal Button AddStoryActorButton => _addStoryActorButton;
         internal Button RestartButton => _restartButton;
+        internal Button SettingsButton => _settingsButton;
     }
 }

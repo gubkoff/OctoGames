@@ -55,6 +55,7 @@ namespace OctoGames.App.Features.HUD
             BindActionButton(view.AddInteractableButton, () => viewModel.AddEntityAsync(GameplayEntityType.Interactable, ct), disposables);
             BindActionButton(view.AddStoryActorButton, () => viewModel.AddEntityAsync(GameplayEntityType.StoryActor, ct), disposables);
             BindActionButton(view.RestartButton, () => viewModel.RestartAsync(ct), disposables);
+            BindActionButton(view.SettingsButton, () => viewModel.OpenSettingsAsync(ct), disposables);
         }
 
         private static void BindActionButton(
