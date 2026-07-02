@@ -8,6 +8,8 @@ namespace OctoGames.Repository
     {
         private readonly Dictionary<Guid, T> _items = new();
 
+        public event Action Changed;
+
         public void Add(T item)
         {
             if (item == null)
@@ -24,6 +26,7 @@ namespace OctoGames.Repository
             }
 
             _items[item.Id] = item;
+            OnChanged();
         }
 
         public void Remove(T item)
@@ -31,7 +34,10 @@ namespace OctoGames.Repository
             if (item == null)
                 return;
 
-            _items.Remove(item.Id);
+            if (!_items.Remove(item.Id))
+                return;
+
+            OnChanged();
         }
 
         public bool TryGet(Guid id, out T item) => _items.TryGetValue(id, out item);
@@ -44,5 +50,7 @@ namespace OctoGames.Repository
         }
 
         public void Clear() => _items.Clear();
+
+        private void OnChanged() => Changed?.Invoke();
     }
 }

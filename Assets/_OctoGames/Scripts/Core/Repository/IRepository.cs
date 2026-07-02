@@ -6,6 +6,8 @@ namespace OctoGames.Repository
     public interface IRepository<T>
         where T : class, IRepositoryEntity
     {
+        event Action Changed;
+
         void Add(T item);
         void Remove(T item);
         bool TryGet(Guid id, out T item);
