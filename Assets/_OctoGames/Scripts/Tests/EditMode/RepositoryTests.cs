@@ -110,6 +110,54 @@ namespace OctoGames.Tests
             Assert.AreEqual(0, _repository.GetAll().Count);
         }
 
+        [Test]
+        public void Add_RaisesChanged()
+        {
+            var changes = 0;
+            _repository.Changed += () => changes++;
+
+            _repository.Add(new StubItem(Guid.NewGuid()));
+
+            Assert.AreEqual(1, changes);
+        }
+
+        [Test]
+        public void Add_SameItemTwice_RaisesChangedOnce()
+        {
+            var changes = 0;
+            _repository.Changed += () => changes++;
+            var item = new StubItem(Guid.NewGuid());
+
+            _repository.Add(item);
+            _repository.Add(item);
+
+            Assert.AreEqual(1, changes);
+        }
+
+        [Test]
+        public void Remove_RaisesChanged()
+        {
+            var changes = 0;
+            _repository.Changed += () => changes++;
+            var item = new StubItem(Guid.NewGuid());
+            _repository.Add(item);
+
+            _repository.Remove(item);
+
+            Assert.AreEqual(2, changes);
+        }
+
+        [Test]
+        public void Remove_UnknownItem_DoesNotRaiseChanged()
+        {
+            var changes = 0;
+            _repository.Changed += () => changes++;
+
+            _repository.Remove(new StubItem(Guid.NewGuid()));
+
+            Assert.AreEqual(0, changes);
+        }
+
         private sealed class StubItem : IRepositoryEntity
         {
             public StubItem(Guid id) => Id = id;

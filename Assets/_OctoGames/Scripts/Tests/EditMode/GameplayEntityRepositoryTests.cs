@@ -29,32 +29,27 @@ namespace OctoGames.Tests
 
         private sealed class StubGameplayEntity : IGameplayEntity
         {
-            private readonly GameplayEntityData _data;
+            private GameplayEntityState _state;
 
             public StubGameplayEntity(Guid id, GameplayEntityState state)
             {
                 Id = id;
-                _data = new GameplayEntityData
-                {
-                    Type = GameplayEntityType.Enemy,
-                    State = state
-                };
+                _state = state;
             }
 
             public Guid Id { get; }
-            public GameplayEntityData Data => _data;
-            public bool IsActive => _data.State == GameplayEntityState.Active;
+            public GameplayEntityType Type => GameplayEntityType.Enemy;
+            public GameplayEntityState State => _state;
+            public Vector3 Position { get; set; }
+            public Vector3 RotationEuler { get; set; }
+            public bool IsActive => _state == GameplayEntityState.Active;
             public GameObject GameObject => null;
 
             public void Initialize(GameplayEntityData data)
             {
             }
 
-            public void ApplyState(GameplayEntityState state) => _data.State = state;
-
-            public void SyncTransformToData()
-            {
-            }
+            public void ApplyState(GameplayEntityState state) => _state = state;
         }
     }
 }

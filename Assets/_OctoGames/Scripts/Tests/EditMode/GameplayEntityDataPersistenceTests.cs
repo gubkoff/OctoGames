@@ -38,11 +38,11 @@ namespace OctoGames.Tests
                 new(GameplayEntityType.Interactable, GameplayEntityState.Disabled, new Vector3(-1f, 0.5f, 0f))
             };
 
-            var saveResult = await persistence.SaveAsync(GameplaySceneStateService.PersistenceKey, entities);
+            var saveResult = await persistence.SaveAsync(GameplayEntityService.PersistenceKey, entities);
             Assert.IsTrue(saveResult.IsSuccess);
 
             var loaded = await persistence.LoadAsync(
-                GameplaySceneStateService.PersistenceKey,
+                GameplayEntityService.PersistenceKey,
                 new List<GameplayEntityData>());
 
             Assert.AreEqual(2, loaded.Count);

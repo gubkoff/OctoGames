@@ -4,6 +4,7 @@ using NUnit.Framework;
 using OctoGames.Popups;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.TestTools;
 using Object = UnityEngine.Object;
 
 namespace OctoGames.Tests
@@ -53,6 +54,11 @@ namespace OctoGames.Tests
         {
             var prefabWithoutView = new GameObject("NoViewPrefab");
             var provider = ScriptableObject.CreateInstance<SOPopupProvider>();
+
+            LogAssert.Expect(
+                LogType.Error,
+                "Prefab 'NoViewPrefab' in provider '' is missing PopupBaseView component.");
+
             AddEntry(provider, prefabWithoutView);
 
             Assert.Throws<KeyNotFoundException>(() => provider.GetPrefab<TestPopup>());
