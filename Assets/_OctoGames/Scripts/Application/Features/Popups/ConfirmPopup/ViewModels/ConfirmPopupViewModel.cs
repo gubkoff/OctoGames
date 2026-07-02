@@ -4,7 +4,7 @@ using OctoGames.Popups;
 using R3;
 using VContainer;
 
-namespace OctoGames.App.Features.Popups.ClassicConfirmPopup
+namespace OctoGames.App.Features.Popups.ConfirmPopup
 {
     public sealed class ConfirmPopupViewModel : PopupViewModelBase
     {

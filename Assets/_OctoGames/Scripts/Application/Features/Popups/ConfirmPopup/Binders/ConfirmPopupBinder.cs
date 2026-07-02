@@ -3,15 +3,15 @@ using R3;
 using UnityEngine.UI;
 using VContainer;
 
-namespace OctoGames.App.Features.Popups.ClassicConfirmPopup
+namespace OctoGames.App.Features.Popups.ConfirmPopup
 {
-    public sealed class ClassicConfirmPopupBinder : PopupBinderBase<ClassicConfirmPopup>
+    public sealed class ConfirmPopupBinder : PopupBinderBase<ConfirmPopup>
     {
         public override IPopupViewModel ResolveViewModel(IObjectResolver resolver) =>
             resolver.Resolve<ConfirmPopupViewModel>();
 
         protected override void BindView(
-            ClassicConfirmPopup popup,
+            ConfirmPopup popup,
             IPopupViewModel viewModel,
             CompositeDisposable disposables)
         {

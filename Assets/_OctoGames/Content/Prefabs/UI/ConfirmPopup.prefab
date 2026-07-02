@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6737429784389282253}
   - component: {fileID: 4767342860202116684}
   m_Layer: 0
-  m_Name: ClassicConfirmPopup
+  m_Name: ConfirmPopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f8c895f0e40e4cd58eeabaf32e3bbad, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: OctoGames.Application::OctoGames.App.Features.Popups.ClassicConfirmPopup.ClassicConfirmPopupBinder
+  m_EditorClassIdentifier: OctoGames.Application::OctoGames.App.Features.Popups.ConfirmPopup.ConfirmPopupBinder
 --- !u!114 &4767342860202116684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d0e1a396c654430faeba757ae51e13b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: OctoGames.Application::OctoGames.App.Features.Popups.ClassicConfirmPopup.ClassicConfirmPopup
+  m_EditorClassIdentifier: OctoGames.Application::OctoGames.App.Features.Popups.ConfirmPopup.ConfirmPopup
   _canvasGroup: {fileID: 6202782650975996470}
   _animation: {fileID: 4014402769389132672}
   _closeOnDimmerClick: 1

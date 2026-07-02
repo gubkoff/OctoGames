@@ -2,8 +2,8 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using OctoGames.App.Features.Entities;
-using OctoGames.App.Features.Popups.ClassicConfirmPopup;
-using ClassicConfirmPopupView = OctoGames.App.Features.Popups.ClassicConfirmPopup.ClassicConfirmPopup;
+using OctoGames.App.Features.Popups.ConfirmPopup;
+using ConfirmPopupView = OctoGames.App.Features.Popups.ConfirmPopup.ConfirmPopup;
 using OctoGames.Popups;
 using OctoGames.Repository;
 using R3;
@@ -22,7 +22,8 @@ namespace OctoGames.App.Features.Popups.EntityDetailPopup
         public ReactiveProperty<bool> ShowDelete { get; } = new(true);
 
         private IRepository<IGameplayEntity> _repository;
-        private IGameplaySceneStateService _sceneState;
+        private IGameplayEntityService _entityService;
+        private IGameplayEntityStateService _entityState;
         private IPopupService _popupService;
         private Guid _entityId;
         private bool _pendingDelete;
@@ -30,11 +31,13 @@ namespace OctoGames.App.Features.Popups.EntityDetailPopup
         [Inject]
         private void Construct(
             IRepository<IGameplayEntity> repository,
-            IGameplaySceneStateService sceneState,
+            IGameplayEntityService entityService,
+            IGameplayEntityStateService entityState,
             IPopupService popupService)
         {
             _repository = repository;
-            _sceneState = sceneState;
+            _entityService = entityService;
+            _entityState = entityState;
             _popupService = popupService;
         }
 
@@ -89,11 +92,11 @@ namespace OctoGames.App.Features.Popups.EntityDetailPopup
                 "Cancel",
                 onConfirm: async token =>
                 {
-                    _sceneState.DestroyEntity(entityId);
-                    await _sceneState.SaveAsync(token);
+                    _entityService.DestroyEntity(entityId);
+                    await _entityService.SaveAsync(token);
                 });
 
-            await _popupService.ShowAsync<ClassicConfirmPopupView, ConfirmPopupRequest>(request, ct: ct);
+            await _popupService.ShowAsync<ConfirmPopupView, ConfirmPopupRequest>(request, ct: ct);
         }
 
         private async UniTask ApplyStateAsync(GameplayEntityState state, CancellationToken ct)
@@ -101,8 +104,8 @@ namespace OctoGames.App.Features.Popups.EntityDetailPopup
             if (!_repository.TryGet(_entityId, out _))
                 return;
 
-            _sceneState.SetEntityState(_entityId, state);
-            await _sceneState.SaveAsync(ct);
+            _entityState.SetState(_entityId, state);
+            await _entityService.SaveAsync(ct);
             RefreshFromEntity();
         }
 
@@ -121,11 +124,11 @@ namespace OctoGames.App.Features.Popups.EntityDetailPopup
             }
 
             Title.Value = $"Entity {entity.Id.ToString()[..8]}";
-            TypeLabel.Value = entity.Data.Type.ToString();
-            StateLabel.Value = entity.Data.State.ToString();
-            ShowDisable.Value = GameplayEntityTransitions.CanDisable(entity);
-            ShowEnable.Value = GameplayEntityTransitions.CanEnable(entity);
-            ShowComplete.Value = GameplayEntityTransitions.CanComplete(entity);
+            TypeLabel.Value = entity.Type.ToString();
+            StateLabel.Value = entity.State.ToString();
+            ShowDisable.Value = _entityState.CanDisable(entity);
+            ShowEnable.Value = _entityState.CanEnable(entity);
+            ShowComplete.Value = _entityState.CanComplete(entity);
             ShowDelete.Value = true;
         }
 

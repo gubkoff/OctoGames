@@ -3,7 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using OctoGames.Popups;
 
-namespace OctoGames.App.Features.Popups.ClassicConfirmPopup
+namespace OctoGames.App.Features.Popups.ConfirmPopup
 {
     public sealed class ConfirmPopupRequest : IPopupRequest
     {
