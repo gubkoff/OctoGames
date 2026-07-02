@@ -17,7 +17,8 @@ namespace OctoGames.Persistence.Serialization
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                IncludeFields = true
             };
 
             options.Converters.Add(new Vector3JsonConverter());

@@ -25,7 +25,7 @@ namespace OctoGames.App.Features.HUD
             _view = GetComponent<BaseHUD>();
         }
 
-        private void OnEnable()
+        private void Start()
         {
             _disposables = new CompositeDisposable();
             _viewModel = _resolver.Resolve<BaseHUDViewModel>();
@@ -33,12 +33,10 @@ namespace OctoGames.App.Features.HUD
             BindView(_view, _viewModel, _disposables);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _viewModel?.Dispose();
             _disposables?.Dispose();
-            _disposables = null;
-            _viewModel = null;
         }
 
         private void BindView(BaseHUD view, BaseHUDViewModel viewModel, CompositeDisposable disposables)

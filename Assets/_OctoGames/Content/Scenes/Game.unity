@@ -720,7 +720,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 331267768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1b2c3d4e5f6789012345678abcdef01, type: 3}
+  m_Script: {fileID: 11500000, guid: 73175adb4bca942e9b86b24f2ac4ba36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: OctoGames.Application::OctoGames.App.Features.HUD.BaseHUDBinder
 --- !u!114 &331267770
