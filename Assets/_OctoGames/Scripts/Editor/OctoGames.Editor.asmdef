@@ -1,0 +1,24 @@
+{
+    "name": "OctoGames.Editor",
+    "rootNamespace": "OctoGames.Editor",
+    "references": [
+        "OctoGames.Core",
+        "OctoGames.Application",
+        "OctoGames.Composition",
+        "VContainer",
+        "UniTask",
+        "R3.Unity",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

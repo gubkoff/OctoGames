@@ -12,11 +12,17 @@ namespace OctoGames.Persistence.Serialization
             _options = options ?? CreateDefaultOptions();
         }
 
-        public static JsonSerializerOptions CreateDefaultOptions() => new()
+        public static JsonSerializerOptions CreateDefaultOptions()
         {
-            WriteIndented = true,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+
+            options.Converters.Add(new Vector3JsonConverter());
+            return options;
+        }
 
         public PersistenceResult<string> Serialize<T>(T value)
         {

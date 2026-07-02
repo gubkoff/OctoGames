@@ -5,7 +5,9 @@
         "OctoGames.Core",
         "UniTask",
         "VContainer",
+        "VContainer.Unity",
         "UnityEngine.UI",
+        "Unity.InputSystem",
         "R3.Unity"
     ],
     "allowUnsafeCode": false

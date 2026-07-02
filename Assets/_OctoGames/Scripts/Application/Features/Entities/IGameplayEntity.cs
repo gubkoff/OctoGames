@@ -5,9 +5,11 @@ namespace OctoGames.App.Features.Entities
 {
     public interface IGameplayEntity : IRepositoryEntity
     {
-        GameplayEntityType Type { get; }
-        GameplayEntityState State { get; }
+        GameplayEntityData Data { get; }
         bool IsActive { get; }
         GameObject GameObject { get; }
+        void Initialize(GameplayEntityData data);
+        void ApplyState(GameplayEntityState state);
+        void SyncTransformToData();
     }
 }

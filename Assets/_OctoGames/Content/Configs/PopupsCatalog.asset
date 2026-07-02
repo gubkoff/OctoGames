@@ -11,8 +11,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8f3a2b14e5d4967a9b0c1d2e3f4a5b6, type: 3}
   m_Name: PopupsCatalog
-  m_EditorClassIdentifier: OctoGames::OctoGames.App.Features.Popups.SOPopupProvider
+  m_EditorClassIdentifier: OctoGames::OctoGames.Popups.SOPopupProvider
   _items:
   - _prefab: {fileID: 2001000000000000001, guid: d5b6c7d8e9f0487090abcdef22222222, type: 3}
+    _scope: 0
+    _defaultShowPolicy: 1
+  - _prefab: {fileID: 764463191736970437, guid: a33b34329253b41b7b2d703cd1b43604, type: 3}
+    _scope: 0
+    _defaultShowPolicy: 1
+  - _prefab: {fileID: 592392130207907656, guid: 545ff2747b1514d9e8d808ad66960d2c, type: 3}
     _scope: 0
     _defaultShowPolicy: 1
