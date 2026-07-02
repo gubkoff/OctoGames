@@ -3,9 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using OctoGames.App.Features.Entities;
 using OctoGames.App.Features.Popups.ConfirmPopup;
-using ConfirmPopupView = OctoGames.App.Features.Popups.ConfirmPopup.ConfirmPopup;
 using OctoGames.App.Features.Popups.SettingsPopup;
-using SettingsPopupView = OctoGames.App.Features.Popups.SettingsPopup.SettingsPopup;
 using OctoGames.Popups;
 using OctoGames.Repository;
 using R3;
@@ -60,11 +58,11 @@ namespace OctoGames.App.Features.HUD
                 "Cancel",
                 onConfirm: token => _entityService.ResetToInitialAsync(token));
 
-            await _popupService.ShowAsync<ConfirmPopupView, ConfirmPopupRequest>(request, ct: ct);
+            await _popupService.ShowAsync<ConfirmPopup, ConfirmPopupRequest>(request, ct: ct);
         }
 
         public UniTask OpenSettingsAsync(CancellationToken ct) =>
-            _popupService.ShowAsync<SettingsPopupView>(ct: ct);
+            _popupService.ShowAsync<SettingsPopup>(ct: ct);
 
         public void Refresh()
         {
