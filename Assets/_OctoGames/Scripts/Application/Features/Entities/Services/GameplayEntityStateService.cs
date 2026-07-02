@@ -7,6 +7,8 @@ namespace OctoGames.App.Features.Entities
     {
         private readonly IRepository<IGameplayEntity> _repository;
 
+        public event Action Changed;
+
         public GameplayEntityStateService(IRepository<IGameplayEntity> repository)
         {
             _repository = repository;
@@ -14,8 +16,14 @@ namespace OctoGames.App.Features.Entities
 
         public void SetState(Guid id, GameplayEntityState state)
         {
-            if (_repository.TryGet(id, out var entity))
-                entity.ApplyState(state);
+            if (!_repository.TryGet(id, out var entity))
+                return;
+
+            if (entity.State == state)
+                return;
+
+            entity.ApplyState(state);
+            RaiseChanged();
         }
 
         public bool CanDisable(IGameplayEntity entity) =>
@@ -28,5 +36,7 @@ namespace OctoGames.App.Features.Entities
             entity.State == GameplayEntityState.Active &&
             (entity.Type == GameplayEntityType.Interactable ||
              entity.Type == GameplayEntityType.StoryActor);
+
+        private void RaiseChanged() => Changed?.Invoke();
     }
 }

@@ -19,30 +19,33 @@ namespace OctoGames.App.Features.HUD
 
         private IRepository<IGameplayEntity> _repository;
         private IGameplayEntityService _entityService;
+        private IGameplayEntityStateService _entityStateService;
         private IPopupService _popupService;
 
         [Inject]
         private void Construct(
             IRepository<IGameplayEntity> repository,
             IGameplayEntityService entityService,
+            IGameplayEntityStateService entityStateService,
             IPopupService popupService)
         {
             _repository = repository;
             _entityService = entityService;
+            _entityStateService = entityStateService;
             _popupService = popupService;
         }
 
         public void Activate()
         {
             _repository.Changed += Refresh;
-            _popupService.AllClosed += Refresh;
+            _entityStateService.Changed += Refresh;
             Refresh();
         }
 
         public void Deactivate()
         {
             _repository.Changed -= Refresh;
-            _popupService.AllClosed -= Refresh;
+            _entityStateService.Changed -= Refresh;
         }
 
         public UniTask AddEntityAsync(GameplayEntityType type, CancellationToken ct) =>
